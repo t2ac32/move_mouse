@@ -85,5 +85,5 @@ def down():
 if __name__ == "__main__":
     init()
     print(colored('Welcome','magenta'))
-    print(colored('... Initializing Morpeko','white','on_magenta'))
+    print(colored('... Initializing Mimikyu - The ghost Mouse','white','on_magenta'))
     show_menu()
