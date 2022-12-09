@@ -3,13 +3,27 @@ import time
 from pick import pick
 from colorama import init
 from termcolor import colored
+import math
 
-screenWidt, screenHeight = pyautogui.size()
-init_mouseX, init_mouseY = pyautogui.position()
+screen_width, screen_height = pyautogui.size()
+init_mouseX, init_mouseY = pyautogui.position(screen_width//2, screen_height//2)
 
 selected = 1
 options = ['Endless mode', 'Input time limit']
 total_options = len(options)
+
+
+def circles(x, y):
+    # Radius
+    r = 40
+    # offsetting by radius
+    pyautogui.moveTo(x + r, y)
+
+    for i in range(360):
+        # setting pace with a modulus
+        if i % 6 == 0:
+            pyautogui.moveTo(x + r * math.cos(math.radians(i)), y + r * math.sin(math.radians(i)))
+
 
 def endless_mode(*args):
     stop_time = 0
@@ -26,12 +40,13 @@ def endless_mode(*args):
                 timeup = True
                 print("Time complete, ending script")
                 break
-            pyautogui.moveTo(init_mouseX+i,init_mouseY)
-        pyautogui.moveTo(init_mouseX, init_mouseY)
+            circles(init_mouseX, init_mouseY)
+
 
 def timer_mode(runtime: int):
     stop_time = time.time() + runtime
     endless_mode(stop_time)
+
 
 def show_menu():
     global selected
@@ -43,6 +58,7 @@ def show_menu():
         endless_mode()
     else:
         input_time()
+
 
 def input_time():
     time_units = ['seconds','minutes','hours']
@@ -68,12 +84,14 @@ def input_time():
     except SyntaxError:
         pass
 
+
 def up():
     global selected
     if selected == 1:
         return
     selected -= 1
     show_menu()
+
 
 def down():
     global selected
@@ -82,8 +100,9 @@ def down():
     selected += 1
     show_menu()
 
+
 if __name__ == "__main__":
     init()
     print(colored('Welcome','magenta'))
-    print(colored('... Initializing Mimikyu - The ghost Mouse','white','on_magenta'))
+    print(colored('... Initializing Mimikyu - The ghost Mouse', 'white', 'on_magenta'))
     show_menu()
