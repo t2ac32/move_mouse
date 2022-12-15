@@ -42,11 +42,9 @@ def endless_mode(*args):
                 break
             circles(init_mouseX, init_mouseY)
 
-
 def timer_mode(runtime: int):
     stop_time = time.time() + runtime
     endless_mode(stop_time)
-
 
 def show_menu():
     global selected
@@ -58,7 +56,6 @@ def show_menu():
         endless_mode()
     else:
         input_time()
-
 
 def input_time():
     time_units = ['seconds','minutes','hours']
@@ -84,7 +81,6 @@ def input_time():
     except SyntaxError:
         pass
 
-
 def up():
     global selected
     if selected == 1:
@@ -92,14 +88,12 @@ def up():
     selected -= 1
     show_menu()
 
-
 def down():
     global selected
     if selected == total_options:
         return
     selected += 1
     show_menu()
-
 
 if __name__ == "__main__":
     init()
